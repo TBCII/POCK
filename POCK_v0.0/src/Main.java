@@ -119,57 +119,53 @@ public class Main {
 
     static void portu() throws IOException {
 
-        Scanner sc = new Scanner(System.in);
+        int fileCount = new File("ScanThis/").list().length;
 
-        System.out.println("Enter the FIRST file for comparison: ");
-        String file1 = sc.nextLine();
-        System.out.println("Enter the SECOND file for comparison: ");
-        String file2 = sc.nextLine();
-
-        BufferedReader bFile1 = new BufferedReader(new FileReader(file1));
-        BufferedReader bFile2 = new BufferedReader(new FileReader(file2));
+        BufferedReader bFile1 = null;
+        BufferedReader bFile2 = null;
 
         String line1;
         String line2;
-        String longestLine = "";
 
-        int currentCharacterCount = 0;
-        int longestCharacterCount = 0;
+        double[][] lineReader = new double[20][20];
+        double[][] similarityCount = new double[20][20];
 
-        double lineReader = 1;
-        double similarityCount = 0;
-
-        while (((line1 = bFile1.readLine()) != null) && ((line2 = bFile2.readLine()) != null)) {
-            if(line1.toLowerCase().equals(line2.toLowerCase())){
-                System.out.println("Same contents at line " + Math.round(lineReader * 100) / 100);
-                similarityCount = similarityCount + 1;
-
-                currentCharacterCount = 0;
-                for(int i = 0; i < line1.length(); i++) {
-                    if(line1.charAt(i) != ' ')
-                        currentCharacterCount++;
-                }
-                if (currentCharacterCount > longestCharacterCount){
-                    longestCharacterCount = currentCharacterCount;
-                    longestLine = line1;
-                }
-
+        for(int i = 1; i <= fileCount; i++){
+            for(int j = 1; j <= fileCount; j++){
+                lineReader[i][j] = 0;
+                similarityCount[i][j] = 0;
             }
-            lineReader = lineReader + 1;
         }
 
-        double similarityIndex = (similarityCount/(lineReader-1))*100;
-        double roundedSimilarityIndex = Math.round(similarityIndex * 100.0) / 100.0;
+        for(int i = 1; i <= fileCount; i++){
+            for(int j = 1; j <= fileCount; j++){
+                bFile1 = new BufferedReader(new FileReader("ScanThis/test_program" + i + ".java"));
+                bFile2 = new BufferedReader(new FileReader("ScanThis/test_program" + j + ".java"));
+                while (((line1 = bFile1.readLine()) != null) && ((line2 = bFile2.readLine()) != null)) {
+                    if (line1.toLowerCase().equals(line2.toLowerCase())) {
+                        similarityCount[i][j] = similarityCount[i][j] + 1;
+                    }
+                    lineReader[i][j] = lineReader[i][j] + 1;
+                }
+            }
+        }
 
-        System.out.println("\nSimilarity index: " + roundedSimilarityIndex + "%");
+        double[][] similarityIndex = new double[5][5];
 
-        if(similarityIndex == 0) System.out.println("\nCONCLUSION: These are EXACTLY DIFFERENT files");
-        else if (similarityIndex == 100) System.out.println("\nCONCLUSION: These are the SAME files");
-        else if (similarityIndex < 50) System.out.println("\nCONCLUSION: These are VERY DIFFERENT files");
-            // MORE THAN 50% DIFFERENCE
-        else System.out.println("\nCONCLUSION: These are SLIGHTLY DIFFERENT files");
+        for(int i = 1; i <= fileCount; i++){
+            for(int j = 1; j <= fileCount; j++){
+                similarityIndex[i][j] = similarityCount[i][j] / lineReader[i][j];
+                similarityIndex[i][j] = Math.round(similarityIndex[i][j] * 100.0) / 100.0;
+            }
+        }
 
-        System.out.println("\nLongest String Similarity: " + longestLine);
+        System.out.println("\nSimilarity index matrix");
+        for(int i = 1; i <= fileCount; i++){
+            for(int j = 1; j <= fileCount; j++){
+                System.out.print(similarityIndex[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
 
         bFile1.close();
         bFile2.close();
