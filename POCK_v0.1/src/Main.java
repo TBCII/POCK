@@ -118,77 +118,31 @@ public class Main {
         else System.out.println("The two C Programs are not similar");
     }
 
-    public static File listProgramFiles(File directory, String directoryName) {
-        File result = null;
-        String fileName = "";
-        File[] directoryList = directory.listFiles();
-
-        for(int i = 0; i < directoryList.length; i++){
-            if(directoryList[i].isDirectory()){
-                result = listProgramFiles(directoryList[i], directoryName);
-                if(result != null) break;
-            }
-            else if(directoryList[i].getName().matches(directoryName)){
-                return directoryList[i];
-            }
-        }
-        return new File(fileName);
-        //return result;
-
-        /*String fileName = "";
-        File[] dirList = directory.listFiles();
-        search:
-        for (int i = 0; i < dirList.length; i++) {
-            if (dirList[i].isDirectory()) listProgramFiles(dirList[i], directoryName);
-            else if (dirList[i].getName().matches(directoryName)) {
-                fileName = dirList[i].toString();
-                break search;
-            }
-        }
-        return new File(fileName);*/
-    }
-
-        /*for(File file : fList){
-            System.out.println(file.getName());
-        }*/
-    /*
-    //get all the files from a directory
-    public static Serializable listProgramFiles(String directoryName){
-        String fileName = "";
-        File dir = new File(directoryName);
-        File[] dirList = directory.listFiles((direc, name) -> name.endsWith(".java") || name.endsWith(".cpp"));
-
-        search:
-        for(int i = 0; i < dirList.length; i++){
-            if(dirList[i].isDirectory()) listProgramFiles(dirList[i], directoryName);
-            else if(dirList[i].getName().matches(directoryName)){
-                fileName = dirList[i].toString();
-                break search;
-            }
-        }
-        for(File file : dirList){
-            if(file.isFile()) System.out.println(file.getName());
-        }
-        return new File(fileName);
-    }*/
-
     static void listFiles(File[] arr, int index, int level){
         if(index == arr.length) return;
 
         for(int i = 0; i < level; i++) System.out.print("\t");
 
-        if(arr[index].isFile()) System.out.println(arr[index].getName());
+        if(arr[index].isFile()) if(arr[index].getName().endsWith(".java") || arr[index].getName().endsWith(".cpp")) System.out.println(arr[index].getName());
+
         else if(arr[index].isDirectory()){
-            System.out.println("[" + arr[index].getName() + "]");
+            System.out.println(">> " + arr[index].getName());
             listFiles(arr[index].listFiles(), 0, level+1);
+
         }
         listFiles(arr, ++index, level);
     }
 
-    static void portu() throws IOException {
-        File assets = new File("./assets/submissions");
-        listProgramFiles(assets, "assets/Submissions");
+    static class submittedPrograms implements FilenameFilter{
+        @Override
+        public boolean accept(File dir, String name) {
+            if(name.endsWith(".cpp") || name.endsWith(".java")) return true;
+            else return false;
+            //return name.endsWith(".cpp") || name.endsWith(".java");
+        }
+    }
 
+    static void portu() throws IOException {
         String directoryPath = "assets/Submissions";
         File submissionsFolder = new File(directoryPath);
 
