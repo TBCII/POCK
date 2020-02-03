@@ -6,6 +6,7 @@
 
 import java.io.*;
 import java.util.Scanner;
+import java.util.concurrent.SubmissionPublisher;
 
 /**
  * Rough Java MOSS Program
@@ -117,9 +118,90 @@ public class Main {
         else System.out.println("The two C Programs are not similar");
     }
 
-    static void portu() throws IOException {
+    public static File listProgramFiles(File directory, String directoryName) {
+        File result = null;
+        String fileName = "";
+        File[] directoryList = directory.listFiles();
 
-        int fileCount = new File("ScanThis/").list().length;
+        for(int i = 0; i < directoryList.length; i++){
+            if(directoryList[i].isDirectory()){
+                result = listProgramFiles(directoryList[i], directoryName);
+                if(result != null) break;
+            }
+            else if(directoryList[i].getName().matches(directoryName)){
+                return directoryList[i];
+            }
+        }
+        return new File(fileName);
+        //return result;
+
+        /*String fileName = "";
+        File[] dirList = directory.listFiles();
+        search:
+        for (int i = 0; i < dirList.length; i++) {
+            if (dirList[i].isDirectory()) listProgramFiles(dirList[i], directoryName);
+            else if (dirList[i].getName().matches(directoryName)) {
+                fileName = dirList[i].toString();
+                break search;
+            }
+        }
+        return new File(fileName);*/
+    }
+
+        /*for(File file : fList){
+            System.out.println(file.getName());
+        }*/
+    /*
+    //get all the files from a directory
+    public static Serializable listProgramFiles(String directoryName){
+        String fileName = "";
+        File dir = new File(directoryName);
+        File[] dirList = directory.listFiles((direc, name) -> name.endsWith(".java") || name.endsWith(".cpp"));
+
+        search:
+        for(int i = 0; i < dirList.length; i++){
+            if(dirList[i].isDirectory()) listProgramFiles(dirList[i], directoryName);
+            else if(dirList[i].getName().matches(directoryName)){
+                fileName = dirList[i].toString();
+                break search;
+            }
+        }
+        for(File file : dirList){
+            if(file.isFile()) System.out.println(file.getName());
+        }
+        return new File(fileName);
+    }*/
+
+    static void listFiles(File[] arr, int index, int level){
+        if(index == arr.length) return;
+
+        for(int i = 0; i < level; i++) System.out.print("\t");
+
+        if(arr[index].isFile()) System.out.println(arr[index].getName());
+        else if(arr[index].isDirectory()){
+            System.out.println("[" + arr[index].getName() + "]");
+            listFiles(arr[index].listFiles(), 0, level+1);
+        }
+        listFiles(arr, ++index, level);
+    }
+
+    static void portu() throws IOException {
+        File assets = new File("./assets/submissions");
+        listProgramFiles(assets, "assets/Submissions");
+
+        String directoryPath = "assets/Submissions";
+        File submissionsFolder = new File(directoryPath);
+
+        if(submissionsFolder.exists() && submissionsFolder.isDirectory()){
+            File arr[] = submissionsFolder.listFiles();
+            System.out.println("**********************************************");
+            System.out.println("Files from main directory : " + submissionsFolder);
+            System.out.println("**********************************************");
+
+            listFiles(arr, 0 ,0);
+        }
+
+        int fileCount = new File("assets/Submissions").list().length;
 
         BufferedReader bFile1 = null;
         BufferedReader bFile2 = null;
@@ -139,8 +221,8 @@ public class Main {
 
         for(int i = 1; i <= fileCount; i++){
             for(int j = 1; j <= fileCount; j++){
-                bFile1 = new BufferedReader(new FileReader("ScanThis/test_program" + i + ".java"));
-                bFile2 = new BufferedReader(new FileReader("ScanThis/test_program" + j + ".java"));
+                bFile1 = new BufferedReader(new FileReader("assets/Submissions" + i + ".java"));
+                bFile2 = new BufferedReader(new FileReader("assets/Submissions" + j + ".java"));
                 while (((line1 = bFile1.readLine()) != null) && ((line2 = bFile2.readLine()) != null)) {
                     if (line1.toLowerCase().equals(line2.toLowerCase())) {
                         similarityCount[i][j] = similarityCount[i][j] + 1;
