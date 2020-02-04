@@ -6,6 +6,7 @@
 
 import java.io.*;
 import java.util.Scanner;
+import java.util.Arrays;
 import java.util.concurrent.SubmissionPublisher;
 
 /**
@@ -17,6 +18,9 @@ import java.util.concurrent.SubmissionPublisher;
  * END - 01/21/2020 - 1145
  */
 public class Main {
+
+    public static String[] filePath = new String[200];
+    public static int fileCount = 0;
 
     /*
      * @param args the command line arguments
@@ -121,14 +125,21 @@ public class Main {
     static void listFiles(File[] arr, int index, int level){
         if(index == arr.length) return;
 
-        for(int i = 0; i < level; i++) System.out.print("\t");
+        if(arr[index].isDirectory()){
+            listFiles(arr[index].listFiles(), 0, level+1);
+        }
 
-        if(arr[index].isFile()) if(arr[index].getName().endsWith(".java") || arr[index].getName().endsWith(".cpp")) System.out.println(arr[index].getName());
+        else if(arr[index].isFile()) {
+            if (arr[index].getName().endsWith(".java") || arr[index].getName().endsWith(".cpp")){
+                System.out.println(arr[index].getPath());
+                filePath[fileCount] = arr[index].getPath();
+                fileCount++;
+            }
+        }
 
         else if(arr[index].isDirectory()){
-            System.out.println(">> " + arr[index].getName());
+            System.out.print(arr[index].getName() + "/");
             listFiles(arr[index].listFiles(), 0, level+1);
-
         }
         listFiles(arr, ++index, level);
     }
@@ -138,7 +149,6 @@ public class Main {
         public boolean accept(File dir, String name) {
             if(name.endsWith(".cpp") || name.endsWith(".java")) return true;
             else return false;
-            //return name.endsWith(".cpp") || name.endsWith(".java");
         }
     }
 
@@ -155,28 +165,26 @@ public class Main {
             listFiles(arr, 0 ,0);
         }
 
-        int fileCount = new File("assets/Submissions").list().length;
-
         BufferedReader bFile1 = null;
         BufferedReader bFile2 = null;
 
         String line1;
         String line2;
 
-        double[][] lineReader = new double[20][20];
-        double[][] similarityCount = new double[20][20];
+        double[][] lineReader = new double[200][200];
+        double[][] similarityCount = new double[200][200];
 
-        for(int i = 1; i <= fileCount; i++){
-            for(int j = 1; j <= fileCount; j++){
+        for(int i = 0; i <= fileCount; i++){
+            for(int j = 0; j <= fileCount; j++){
                 lineReader[i][j] = 0;
                 similarityCount[i][j] = 0;
             }
         }
 
-        for(int i = 1; i <= fileCount; i++){
-            for(int j = 1; j <= fileCount; j++){
-                bFile1 = new BufferedReader(new FileReader("assets/Submissions" + i + ".java"));
-                bFile2 = new BufferedReader(new FileReader("assets/Submissions" + j + ".java"));
+        for(int i = 0; i <= fileCount-1; i++){
+            for(int j = 0; j <= fileCount-1; j++){
+                bFile1 = new BufferedReader(new FileReader(filePath[i]));
+                bFile2 = new BufferedReader(new FileReader(filePath[j]));
                 while (((line1 = bFile1.readLine()) != null) && ((line2 = bFile2.readLine()) != null)) {
                     if (line1.toLowerCase().equals(line2.toLowerCase())) {
                         similarityCount[i][j] = similarityCount[i][j] + 1;
@@ -186,18 +194,18 @@ public class Main {
             }
         }
 
-        double[][] similarityIndex = new double[5][5];
+        double[][] similarityIndex = new double[200][200];
 
-        for(int i = 1; i <= fileCount; i++){
-            for(int j = 1; j <= fileCount; j++){
+        for(int i = 0; i <= fileCount; i++){
+            for(int j = 0; j <= fileCount; j++){
                 similarityIndex[i][j] = similarityCount[i][j] / lineReader[i][j];
                 similarityIndex[i][j] = Math.round(similarityIndex[i][j] * 100.0) / 100.0;
             }
         }
 
         System.out.println("\nSimilarity index matrix");
-        for(int i = 1; i <= fileCount; i++){
-            for(int j = 1; j <= fileCount; j++){
+        for(int i = 0; i <= fileCount; i++){
+            for(int j = 0; j <= fileCount; j++){
                 System.out.print(similarityIndex[i][j] + " ");
             }
             System.out.print("\n");
