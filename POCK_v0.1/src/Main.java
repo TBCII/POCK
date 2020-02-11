@@ -153,6 +153,7 @@ public class Main {
     }
 
     static void portu() throws IOException {
+        DecimalFormat df = new DecimalFormat("0.00");
         String directoryPath = "assets/Submissions";
         File submissionsFolder = new File(directoryPath);
 
@@ -168,48 +169,169 @@ public class Main {
         BufferedReader bFile1 = null;
         BufferedReader bFile2 = null;
 
-        String line1;
-        String line2;
+        String line1 = "";
+        String line2 = "";
+
+        String line1SansSpaces = "";
+        String line2SansSpaces = "";
+        String longestLine = "";
+        String longestLineFile1 = "";
+        String longestLineFile2 = "";
+
+        int currentCharacterCount = 0;
+        int longestCharacterCount = 0;
+        int lineCount = 0;
+        int longestLineNum = 0;
+
+        int lineCount1 = 0;
+        int lineCount2 = 0;
+        int otherLC2 = 0;
+
 
         double[][] lineReader = new double[200][200];
         double[][] similarityCount = new double[200][200];
 
+        String[][] lineStorage1 = new String[200][500];
+        String[][] lineStorage2 = new String[200][500];
+
         for(int i = 0; i <= fileCount; i++){
             for(int j = 0; j <= fileCount; j++){
                 lineReader[i][j] = 0;
-                similarityCount[i][j] = 0;
+                similarityCount[i][j] = 1;
             }
         }
 
+        for(int i = 1; i < 200; i++){
+            for(int j = 1; j < 500; j++){
+                lineStorage1[i][j] = "";
+                lineStorage2[i][j] = "";
+            }
+        }
+
+        // LINE TO ARRAY PUSHING
+        for(int i = 0; i <= fileCount-1; i++){
+            for(int j = 0; j <= fileCount-1; j++){
+                bFile1 = new BufferedReader(new FileReader(filePath[i]));
+                bFile2 = new BufferedReader(new FileReader(filePath[j]));
+
+                lineCount1 = 0;
+                while ((line1 = bFile1.readLine()) != null){
+                    line1SansSpaces = line1.replaceAll("\\s+", "");
+                    lineCount1 = lineCount1 + 1;
+                    lineStorage1[i][lineCount1] = line1SansSpaces;
+
+                    if(bFile2.readLine() != null) {
+                        lineCount2 = 0;
+                        while ((line2 = bFile2.readLine()) != null) {
+                            line2SansSpaces = line2.replaceAll("\\s+", "");
+                            lineCount2 = lineCount2 + 1;
+                            lineStorage2[j][lineCount2] = line2SansSpaces;
+                        }
+                    }
+                }
+            }
+        }
+
+        // TOTAL LINE COUNTER
+        for(int i = 0; i <= fileCount-1; i++){
+            for(int j = 0; j <= fileCount-1; j++){
+                bFile1 = new BufferedReader(new FileReader(filePath[i]));
+                bFile2 = new BufferedReader(new FileReader(filePath[j]));
+                if(bFile1.readLine() != null) {
+                    lineCount1 = 0;
+                    while (bFile1.readLine() != null) {
+                        lineCount1 = lineCount1 + 1;
+                    }
+                }
+                if(bFile2.readLine() != null) {
+                    lineCount2 = 0;
+                    while (bFile2.readLine() != null) {
+                        lineCount2 = lineCount2 + 1;
+                    }
+                }
+                // gets the total amount of lines for similarity of the file with the largest number of lines.
+                //System.out.println("\nFILE" + i + " vs " + j +" - "+ lineCount1 + " vs " + lineCount2);
+                if (lineCount1 < lineCount2) lineReader[i][j] = lineCount1;
+                else lineReader[i][j] = lineCount2;
+            }
+        }
+
+        // LINE SIMILARITY CHECKER
+        for(int i = 0; i <= fileCount-1; i++){
+            for(int j = 0; j <= fileCount-1; j++){
+                //System.out.println("\nFILE " + i + " vs " + j);
+                lineCount1 = 0;
+                while (lineCount1 < lineReader[i][j]){
+                    lineCount1++;
+                    lineCount2 = 0;
+                    while(lineCount2 < lineReader[i][j]){
+                        lineCount2++;
+                        if (lineStorage1[i][lineCount1].equals(lineStorage2[j][lineCount2])) {
+                            //System.out.print("FOUND!");
+                            similarityCount[i][j]++;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        // SEARCH FOR THE LONGEST LINE SIMILARITY
         for(int i = 0; i <= fileCount-1; i++){
             for(int j = 0; j <= fileCount-1; j++){
                 bFile1 = new BufferedReader(new FileReader(filePath[i]));
                 bFile2 = new BufferedReader(new FileReader(filePath[j]));
                 while (((line1 = bFile1.readLine()) != null) && ((line2 = bFile2.readLine()) != null)) {
-                    if (line1.toLowerCase().equals(line2.toLowerCase())) {
-                        similarityCount[i][j] = similarityCount[i][j] + 1;
+                    lineCount = 0;
+                    lineCount = lineCount + 1;
+
+                    line1SansSpaces = line1.replaceAll("\\s+","");
+                    line2SansSpaces = line2.replaceAll("\\s+","");
+
+                    if (line1SansSpaces.toLowerCase().equals(line2SansSpaces.toLowerCase())) {
+                        if(!filePath[i].equals(filePath[j])){
+                            currentCharacterCount = 0;
+                            for(int k = 0; k < line1SansSpaces.length(); k++) {
+                                currentCharacterCount++;
+                            }
+                            if (currentCharacterCount > longestCharacterCount){
+                                longestCharacterCount = currentCharacterCount;
+                                longestLine = line1;
+                                longestLineFile1 = filePath[i];
+                                longestLineFile2 = filePath[j];
+                                longestLineNum = lineCount;
+                            }
+                        }
                     }
-                    lineReader[i][j] = lineReader[i][j] + 1;
                 }
             }
         }
 
+        /*
+        ========================
+            OUTPUTS
+        ========================
+         */
+
         double[][] similarityIndex = new double[200][200];
 
-        for(int i = 0; i <= fileCount; i++){
-            for(int j = 0; j <= fileCount; j++){
-                similarityIndex[i][j] = similarityCount[i][j] / lineReader[i][j];
-                similarityIndex[i][j] = Math.round(similarityIndex[i][j] * 100.0) / 100.0;
-            }
-        }
-
         System.out.println("\nSimilarity index matrix");
-        for(int i = 0; i <= fileCount; i++){
-            for(int j = 0; j <= fileCount; j++){
-                System.out.print(similarityIndex[i][j] + " ");
+        for(int i = 0; i <= fileCount-1; i++){
+            for(int j = 0; j <= fileCount-1; j++){
+                similarityIndex[i][j] = similarityCount[i][j] / lineReader[i][j];
+                System.out.print(df.format(similarityIndex[i][j]) + " ");
             }
             System.out.print("\n");
         }
+
+        longestLineFile1 = longestLineFile1.replace("assets\\Submissions\\","");
+        longestLineFile2 = longestLineFile2.replace("assets\\Submissions\\","");
+
+        System.out.println("\nLongest String Similarity: " + longestLine);
+        System.out.println("Found in Files: " + longestLineFile1 + "\t\tAND\t\t" + longestLineFile2);
+        System.out.println("Found in Line: " + longestLineNum);
+
+        // THE PROGRAM COMPARES 102 FILES
 
         bFile1.close();
         bFile2.close();
