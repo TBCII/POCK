@@ -1,5 +1,6 @@
 package MatrixDisplay;
 
+import Menu.HalsteadMetrics;
 import Menu.MenuController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,8 @@ import javafx.scene.text.Text;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Controller extends Menu.MenuController {
 
@@ -37,12 +40,19 @@ public class Controller extends Menu.MenuController {
     String longestLine = "";
     String longestLineFile1 = "";
     String longestLineFile2 = "";
+    /*String[] operators = {"main()", "-", "for", "= =", "!=", "getchar", "( )", "&&", "--", "return", "++", "printf", ">="
+    ,"<=", "==", "strindex", "if", ">", "<", "getline", "while", "{ }", "=", "[ ]", "[]", ".", ",", ":", ";", "eof", ""};*/
+    String[] operators = {"+", "-", "*", "/", "%", "++", "--", "+=", "-=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!",
+    "&", "|", "^", "<<", ">>", "=", "*=", "/=", "%=", "sizeof", "instanceof", "<", ">", ">>>", "<<<", "? :", "int", "float",
+    "if", "for", "while", "do", "double", "else", "long", "short", "return", "char", "typedef", "switch", "unsigned", "void",
+    "static", "struct", "final", "goto", "System", "println", "print", "main", "out", ";", "getch", "getchar", "getline",
+    "readline", "EOF", ","};
+    String[] fileStorage = new String[120];
 
     int currentCharacterCount = 0;
     int longestCharacterCount = 0;
     int lineCount = 0;
     int longestLineNum = 0;
-
     int lineCount1;
     int lineCount2;
 
@@ -60,10 +70,10 @@ public class Controller extends Menu.MenuController {
     public void initialize() throws IOException {
 
         System.out.println("I N I T I A L I Z I N G");
+        //HalsteadMetrics getMetrics = new HalsteadMetrics();
 
         if(submissionsFolder.exists() && submissionsFolder.isDirectory()){
             File arr[] = submissionsFolder.listFiles();
-
             listFiles(arr, 0 ,0);
         }
 
@@ -87,6 +97,7 @@ public class Controller extends Menu.MenuController {
         // DISPLAY MATRIX AND SIMILARITY STATUSES
         displayMatrix();
 
+
         bFile1.close();
         bFile2.close();
     }
@@ -94,9 +105,7 @@ public class Controller extends Menu.MenuController {
     static void listFiles(File[] arr, int index, int level){
         if(index == arr.length) return;
 
-        if(arr[index].isDirectory()){
-            listFiles(arr[index].listFiles(), 0, level+1);
-        }
+        if(arr[index].isDirectory())listFiles(arr[index].listFiles(), 0, level+1);
 
         else if(arr[index].isFile()) {
             if (arr[index].getName().endsWith(".java") || arr[index].getName().endsWith(".cpp")){
@@ -124,11 +133,29 @@ public class Controller extends Menu.MenuController {
                     arrayOfLines.add(line1SansSpaces);
                     lineCount1 = lineCount1 + 1;
                 }
-
                 lineStorage[i] = arrayOfLines;
             }
         }
     }
+
+
+
+   /* private void countOperators(){
+        List<char[]> readFiles = filesParse(fileStorage);
+        boolean isComment = false;
+        int operatorCount = 0;
+        int operandCount = 0;
+        int totalOperator = 0;
+        int totalOperand = 0;
+        int presentOperators = 0;
+        int presentOperands = 0;
+        //ArrayList<String> presentOperators = new ArrayList<>();
+        //ArrayList<String> presentOperands = new ArrayList<>();
+
+        for(int i = 0; i < readFiles.size(); i++){
+
+        }
+    }*/
 
     private void checkIndividualSimilarity() throws IOException {
         for (int i = 0; i < fileCount; i++) {
