@@ -5,15 +5,25 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+
 import javafx.scene.shape.Rectangle;
 
 public class MenuController {
 
     public static String absoluteFolderPath;
+    public static String[] filePath = new String[120];
+    public static int fileCount = 0;
+    public static String[] fileNames = new String[120];
+    public static String longestLine = "";
+    public static String longestLineFile1, longestLineFile2, longestLineDir1, longestLineDir2 = "";
+    //public static int longestLineNum = 0;
+    public static double firstScore = 0, secondScore = 0, thirdScore = 0, fourthScore = 0, fifthScore = 0;
+    public static int[][] topIndices = new int[5][2];
+    public String directoryPath = absoluteFolderPath;
 
     @FXML
     private AnchorPane MenuAnchor;
@@ -31,6 +41,24 @@ public class MenuController {
     private Rectangle rectPath2;
 
     public void initialize() throws IOException {
+
+        absoluteFolderPath = "";
+        longestLine = "";
+        longestLineFile1 = "";
+        longestLineFile2 = "";
+        fileCount = 0/* longestLineNum = 0*/;
+        firstScore = secondScore = thirdScore = fourthScore = fifthScore = 0;
+
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 2; j++){
+                topIndices[i][j] = 0;
+            }
+        }
+
+        for(int i = 0; i < 120; i++){
+            filePath[i] = "";
+            fileNames[i] = "";
+        }
 
         // [FOR ANIMATION PURPOSES] main menu animations
         PathTransition transition = new PathTransition();
@@ -51,11 +79,9 @@ public class MenuController {
         transition2.play();
     }
 
-    // Button function go to the page to generate the encrypted message
     public void ProceedSearch(ActionEvent actionEvent) throws IOException {
         AnchorPane nextAnchorPane = FXMLLoader.load(getClass().getResource("SearchFile.fxml"));
         MenuAnchor.getChildren().setAll(nextAnchorPane);
     }
-
 
 }

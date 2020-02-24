@@ -1,34 +1,40 @@
 package MatrixDisplay;
 
-import Menu.HalsteadMetrics;
-import Menu.MenuController;
+import javafx.animation.PathTransition;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class Controller extends Menu.MenuController {
 
-    public static String[] filePath = new String[120];
-    public static int fileCount = 0;
-
     public AnchorPane matrixAnchor;
     public GridPane CorrelationMatrix;
+    public GridPane FilesList;
     public ScrollPane scrollPane;
-    public Text longestString;
-    public Text fileFound;
-    public Text lineMatched;
+    public Text fileTotal;
+    public Button toSimStats;
+    @FXML
+    private Rectangle squareOne;
+    @FXML
+    private Rectangle rectPath;
 
     BufferedReader bFile1 = null;
     BufferedReader bFile2 = null;
@@ -37,22 +43,13 @@ public class Controller extends Menu.MenuController {
     String line2SansSpaces = "";
     String line1;
     String line2 = "";
-    String longestLine = "";
-    String longestLineFile1 = "";
-    String longestLineFile2 = "";
-    /*String[] operators = {"main()", "-", "for", "= =", "!=", "getchar", "( )", "&&", "--", "return", "++", "printf", ">="
-    ,"<=", "==", "strindex", "if", ">", "<", "getline", "while", "{ }", "=", "[ ]", "[]", ".", ",", ":", ";", "eof", ""};*/
-    String[] operators = {"+", "-", "*", "/", "%", "++", "--", "+=", "-=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!",
-    "&", "|", "^", "<<", ">>", "=", "*=", "/=", "%=", "sizeof", "instanceof", "<", ">", ">>>", "<<<", "? :", "int", "float",
-    "if", "for", "while", "do", "double", "else", "long", "short", "return", "char", "typedef", "switch", "unsigned", "void",
-    "static", "struct", "final", "goto", "System", "println", "print", "main", "out", ";", "getch", "getchar", "getline",
-    "readline", "EOF", ","};
-    String[] fileStorage = new String[120];
+
 
     int currentCharacterCount = 0;
     int longestCharacterCount = 0;
     int lineCount = 0;
-    int longestLineNum = 0;
+
+
     int lineCount1;
     int lineCount2;
 
@@ -64,16 +61,22 @@ public class Controller extends Menu.MenuController {
 
     DecimalFormat df = new DecimalFormat("0.00");
 
-    String directoryPath = absoluteFolderPath;
     File submissionsFolder = new File(directoryPath);
 
     public void initialize() throws IOException {
 
+        PathTransition transition = new PathTransition();
+        transition.setNode(squareOne);
+        transition.setDuration(Duration.seconds(5));
+        transition.setPath(rectPath);
+        transition.setCycleCount(PathTransition.INDEFINITE);
+        transition.play();
+
         System.out.println("I N I T I A L I Z I N G");
-        //HalsteadMetrics getMetrics = new HalsteadMetrics();
 
         if(submissionsFolder.exists() && submissionsFolder.isDirectory()){
             File arr[] = submissionsFolder.listFiles();
+
             listFiles(arr, 0 ,0);
         }
 
@@ -84,7 +87,6 @@ public class Controller extends Menu.MenuController {
                 similarityCount[i][j] = 0;
             }
         }
-
         // LINE TO ARRAY PUSHING
         pushLineContentsToArray();
 
@@ -97,19 +99,27 @@ public class Controller extends Menu.MenuController {
         // DISPLAY MATRIX AND SIMILARITY STATUSES
         displayMatrix();
 
+        // DISPLAY ALL OF THE FILES
+        displayFiles();
 
         bFile1.close();
         bFile2.close();
+
+        if(fileCount < 2) toSimStats.setDisable(true);
+
     }
 
     static void listFiles(File[] arr, int index, int level){
         if(index == arr.length) return;
 
-        if(arr[index].isDirectory())listFiles(arr[index].listFiles(), 0, level+1);
+        if(arr[index].isDirectory()){
+            listFiles(arr[index].listFiles(), 0, level+1);
+        }
 
         else if(arr[index].isFile()) {
             if (arr[index].getName().endsWith(".java") || arr[index].getName().endsWith(".cpp")){
                 //System.out.println(arr[index].getPath());
+                fileNames[fileCount] = arr[index].getName();
                 filePath[fileCount] = arr[index].getPath();
                 fileCount++;
             }
@@ -125,7 +135,9 @@ public class Controller extends Menu.MenuController {
     private void pushLineContentsToArray() throws IOException {
         for(int i = 0; i < fileCount; i++){
             for(int j = 0; j < fileCount; j++){
+
                 bFile1 = new BufferedReader(new FileReader(filePath[i]));
+
                 ArrayList<String> arrayOfLines = new ArrayList<String>();
                 lineCount1 = 0;
                 while ((line1 = bFile1.readLine()) != null) {
@@ -133,29 +145,11 @@ public class Controller extends Menu.MenuController {
                     arrayOfLines.add(line1SansSpaces);
                     lineCount1 = lineCount1 + 1;
                 }
+
                 lineStorage[i] = arrayOfLines;
             }
         }
     }
-
-
-
-   /* private void countOperators(){
-        List<char[]> readFiles = filesParse(fileStorage);
-        boolean isComment = false;
-        int operatorCount = 0;
-        int operandCount = 0;
-        int totalOperator = 0;
-        int totalOperand = 0;
-        int presentOperators = 0;
-        int presentOperands = 0;
-        //ArrayList<String> presentOperators = new ArrayList<>();
-        //ArrayList<String> presentOperands = new ArrayList<>();
-
-        for(int i = 0; i < readFiles.size(); i++){
-
-        }
-    }*/
 
     private void checkIndividualSimilarity() throws IOException {
         for (int i = 0; i < fileCount; i++) {
@@ -217,9 +211,11 @@ public class Controller extends Menu.MenuController {
                             if (currentCharacterCount > longestCharacterCount){
                                 longestCharacterCount = currentCharacterCount;
                                 longestLine = line1;
-                                longestLineFile1 = filePath[i];
-                                longestLineFile2 = filePath[j];
-                                longestLineNum = lineCount;
+                                longestLineDir1 = filePath[i];
+                                longestLineDir2 = filePath[j];
+                                longestLineFile1 = fileNames[i];
+                                longestLineFile2 = fileNames[j];
+                                //longestLineNum = lineCount;
                             }
                         }
                     }
@@ -228,15 +224,21 @@ public class Controller extends Menu.MenuController {
         }
     }
 
-    private void displayMatrix() throws IOException {
+    private void displayMatrix() {
         for(int i = 0; i < fileCount; i++){
             for(int j = 0; j < fileCount; j++){
-                similarityIndex[i][j] = similarityCount[i][j] / totalLineCount[i][j];
+
+                if (totalLineCount[i][j] == 0) similarityIndex[i][j] = 0;
+                else similarityIndex[i][j] = similarityCount[i][j] / totalLineCount[i][j];
+
                 Label correlationScore = new Label();
                 correlationScore.setText(String.valueOf(df.format(similarityIndex[i][j])));
                 VBox cellFormat = new VBox();
                 correlationScore.setStyle("-fx-text-fill: #000000;");
                 cellFormat.setAlignment(Pos.CENTER);
+
+                Tooltip t = new Tooltip("  [" + (i + 1) + "] " + fileNames[i] + "  &  " + " [" + (j + 1) + "] " + fileNames[j] + " ");
+                Tooltip.install(cellFormat, t);
 
                 if(similarityIndex[i][j] <= 0) cellFormat.setStyle("-fx-border-color: #000000;\n" + "-fx-background-color: #ffffff;");
                 else if(similarityIndex[i][j] <= 0.125) cellFormat.setStyle("-fx-border-color: #000000;\n" + "-fx-background-color: #cccccc;");
@@ -260,12 +262,130 @@ public class Controller extends Menu.MenuController {
             }
         }
 
+        fileTotal.setText(" Total Number of Files:  " + fileCount);
+
         longestLineFile1 = longestLineFile1.replace("assets\\Submissions\\","");
         longestLineFile2 = longestLineFile2.replace("assets\\Submissions\\","");
 
-        longestString.setText(longestLine);
-        fileFound.setText(longestLineFile1 + "\t\tAND\t\t" + longestLineFile2);
-        lineMatched.setText(String.valueOf(longestLineNum));
+
+
+        for (int i = 0; i < fileCount; i++) {
+            for (int j = 0; j < fileCount; j++) {
+                if (i != j) {
+                    if (similarityIndex[i][j] > firstScore) {
+                        fifthScore = fourthScore;
+                        fourthScore = thirdScore;
+                        thirdScore = secondScore;
+                        secondScore = firstScore;
+                        firstScore = similarityIndex[i][j];
+
+                        topIndices[4][0] = topIndices[3][0];
+                        topIndices[4][1] = topIndices[3][1];
+
+                        topIndices[3][0] = topIndices[2][0];
+                        topIndices[3][1] = topIndices[2][1];
+
+                        topIndices[2][0] = topIndices[1][0];
+                        topIndices[2][1] = topIndices[1][1];
+
+                        topIndices[1][0] = topIndices[0][0];
+                        topIndices[1][1] = topIndices[0][1];
+
+                        topIndices[0][0] = i;
+                        topIndices[0][1] = j;
+                    }
+
+                    else if (similarityIndex[i][j] > secondScore) {
+                        fifthScore = fourthScore;
+                        fourthScore = thirdScore;
+                        thirdScore = secondScore;
+                        secondScore = similarityIndex[i][j];
+
+                        topIndices[4][0] = topIndices[3][0];
+                        topIndices[4][1] = topIndices[3][1];
+
+                        topIndices[3][0] = topIndices[2][0];
+                        topIndices[3][1] = topIndices[2][1];
+
+                        topIndices[2][0] = topIndices[1][0];
+                        topIndices[2][1] = topIndices[1][1];
+
+                        topIndices[1][0] = i;
+                        topIndices[1][1] = j;
+                    }
+
+                    else if (similarityIndex[i][j] > thirdScore) {
+                        fifthScore = fourthScore;
+                        fourthScore = thirdScore;
+                        thirdScore = similarityIndex[i][j];
+
+                        topIndices[4][0] = topIndices[3][0];
+                        topIndices[4][1] = topIndices[3][1];
+
+                        topIndices[3][0] = topIndices[2][0];
+                        topIndices[3][1] = topIndices[2][1];
+
+                        topIndices[2][0] = i;
+                        topIndices[2][1] = j;
+                    }
+
+                    else if (similarityIndex[i][j] > fourthScore) {
+                        fifthScore = fourthScore;
+                        fourthScore = similarityIndex[i][j];
+
+                        topIndices[4][0] = topIndices[3][0];
+                        topIndices[4][1] = topIndices[3][1];
+
+                        topIndices[3][0] = i;
+                        topIndices[3][1] = j;
+                    }
+
+                    else if (similarityIndex[i][j] > fifthScore) {
+                        fifthScore = similarityIndex[i][j];
+
+                        topIndices[4][0] = i;
+                        topIndices[4][1] = j;
+                    }
+                }
+            }
+        }
+    }
+
+    private void displayFiles(){
+        for(int i = 0; i < fileCount; i++){
+            Label fileName = new Label();
+            fileName.setText("  [" + (i + 1) + "] " + fileNames[i]);
+            fileName.setStyle("-fx-text-fill: #5d5d4b;");
+
+            VBox cellFormat = new VBox();
+            cellFormat.setStyle("-fx-border-color: #5d5d4b;");
+
+            Tooltip t = new Tooltip(filePath[i]);
+            Tooltip.install(cellFormat, t);
+
+            cellFormat.getChildren().addAll(fileName);
+            FilesList.add(cellFormat, 0, i);
+        }
+    }
+
+    public void longestStringStats(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("LongestString.fxml"));
+
+        Scene scene = new Scene(root);
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void programMetrics(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("ProgramMetrics.fxml"));
+
+        Scene scene = new Scene(root);
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void getBack(ActionEvent actionEvent) throws IOException {
