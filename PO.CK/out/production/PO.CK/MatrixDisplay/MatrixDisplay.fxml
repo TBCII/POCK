@@ -9,16 +9,18 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="matrixAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MatrixDisplay.Controller">
+<AnchorPane fx:id="matrixAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MatrixDisplay.Controller">
    <children>
-      <ScrollPane fx:id="scrollPane" hbarPolicy="ALWAYS" prefHeight="800.0" prefWidth="1280.0" vbarPolicy="ALWAYS">
+      <Rectangle fx:id="rectPath" fill="#f6f6f6" height="48.0" stroke="#5d5d4b" strokeType="INSIDE" strokeWidth="0.0" width="330.0" />
+      <ScrollPane fx:id="scrollPane" hbarPolicy="ALWAYS" layoutX="104.0" layoutY="164.0" prefHeight="611.0" prefWidth="948.0" vbarPolicy="ALWAYS">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2080.0" prefWidth="3320.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1870.0" prefWidth="3300.0">
                <children>
-                  <GridPane fx:id="CorrelationMatrix" alignment="CENTER" layoutX="120.0" layoutY="210.0">
+                  <GridPane fx:id="CorrelationMatrix" alignment="CENTER">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
@@ -244,57 +246,204 @@
                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="17.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                   </GridPane>
-                  <Text fill="#5d5d4b" layoutX="276.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="◽ FILE CORRELATION MATRIX ◽" textAlignment="CENTER" wrappingWidth="727.3320007324219">
-                     <font>
-                        <Font name="HelveticaLTStd-Blk" size="39.0" />
-                     </font>
-                  </Text>
-                  <Text fill="#5d5d4b" layoutX="43.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LONGEST STRING SIMILARITY: " wrappingWidth="375.3320007324219">
-                     <font>
-                        <Font name="HelveticaLTStd-Bold" size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fill="#5d5d4b" layoutX="43.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FOUND IN FILES:" wrappingWidth="375.3320007324219">
-                     <font>
-                        <Font name="HelveticaLTStd-Bold" size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fill="#5d5d4b" layoutX="43.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FOUND IN LINE:" wrappingWidth="375.3320007324219">
-                     <font>
-                        <Font name="HelveticaLTStd-Bold" size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="longestString" fill="#5d5d4b" layoutX="418.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="838.3320007324219">
-                     <font>
-                        <Font name="HelveticaLTStd-Roman" size="18.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="fileFound" fill="#5d5d4b" layoutX="418.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="838.3320007324219">
-                     <font>
-                        <Font name="HelveticaLTStd-Roman" size="18.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="lineMatched" fill="#5d5d4b" layoutX="418.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="838.3320007324219">
-                     <font>
-                        <Font name="HelveticaLTStd-Roman" size="18.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="387.0" fitWidth="60.0" layoutX="43.0" layoutY="210.0">
-                     <image>
-                        <Image url="@../imageAssets/HEATMAP.png" />
-                     </image>
-                  </ImageView>
-                  <Button layoutX="43.0" layoutY="26.0" mnemonicParsing="false" onAction="#getBack" prefHeight="40.0" prefWidth="114.0" style="-fx-background-color: #FFFFFF;" text="BACK" textAlignment="CENTER" textFill="#5d5d4b">
-                     <font>
-                        <Font name="HelveticaLTStd-Blk" size="24.0" />
-                     </font>
-                     <effect>
-                        <DropShadow blurType="GAUSSIAN" color="#8a8a8a" height="40.0" radius="19.5" width="40.0" />
-                     </effect>
-                  </Button>
                </children>
             </AnchorPane>
         </content>
       </ScrollPane>
+      <ScrollPane fx:id="scrollPane2" hbarPolicy="ALWAYS" layoutX="1065.0" layoutY="266.0" prefHeight="476.0" prefWidth="190.0" vbarPolicy="ALWAYS">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2200.0" prefWidth="175.0">
+               <children>
+                  <GridPane fx:id="FilesList" alignment="CENTER">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="175.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+
+                     </rowConstraints>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <Text fill="#5d5d4b" layoutX="276.0" layoutY="70.0" opacity="0.25" scaleX="0.98" scaleY="0.98" strokeType="OUTSIDE" strokeWidth="0.0" text="◽ FILE CORRELATION MATRIX ◽" textAlignment="CENTER" wrappingWidth="727.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Blk" size="39.0" />
+         </font>
+      </Text>
+      <Text fill="#5d5d4b" layoutX="276.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="◽ FILE CORRELATION MATRIX ◽" textAlignment="CENTER" wrappingWidth="727.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Blk" size="39.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="387.0" fitWidth="60.0" layoutX="2.0" layoutY="164.0">
+         <image>
+            <Image url="@../imageAssets/HEATMAP.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="32.0" layoutY="27.0" mnemonicParsing="false" onAction="#getBack" prefHeight="40.0" prefWidth="114.0" style="-fx-background-color: #FFFFFF;" text="BACK" textAlignment="CENTER" textFill="#5d5d4b">
+         <font>
+            <Font name="HelveticaLTStd-Blk" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" color="#8a8a8a" height="40.0" radius="19.5" width="40.0" />
+         </effect>
+      </Button>
+      <Button fx:id="toSimStats" layoutX="382.0" layoutY="99.0" mnemonicParsing="false" onAction="#longestStringStats" prefHeight="48.0" prefWidth="482.0" style="-fx-background-color: #FFFFFF;" text="VIEW SIMILARITY STATISTICS" textAlignment="CENTER" textFill="#5d5d4b">
+         <font>
+            <Font name="HelveticaLTStd-Blk" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" color="#8a8a8a" height="40.0" radius="19.5" width="40.0" />
+         </effect>
+      </Button>
+      <Button fx:id="toMetrics" layoutX="877.0" layoutY="99.0" mnemonicParsing="false" onAction="#programMetrics" prefHeight="48.0" prefWidth="380.0" style="-fx-background-color: #FFFFFF;" text="VIEW PROGRAM METRICS" textAlignment="CENTER" textFill="#5d5d4b">
+         <font>
+            <Font name="HelveticaLTStd-Blk" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" color="#8a8a8a" height="40.0" radius="19.5" width="40.0" />
+         </effect>
+      </Button>
+      <ImageView fitHeight="48.0" fitWidth="219.0" layoutX="-69.0" layoutY="642.0" opacity="0.4" rotate="-90.0">
+         <image>
+            <Image url="@../imageAssets/pocktext.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="squareOne" fill="#f6f6f6" height="7.0" layoutX="40.0" layoutY="99.0" stroke="#5d5d4b" strokeType="INSIDE" width="7.0" />
+      <ImageView fitHeight="159.0" fitWidth="1280.0" layoutY="786.0">
+         <image>
+            <Image url="@../imageAssets/stripes.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="89.0" fitWidth="190.0" layoutX="1065.0" layoutY="164.0">
+         <image>
+            <Image url="@../imageAssets/FilesList.png" />
+         </image>
+      </ImageView>
+      <Rectangle fill="#f6f6f6" height="20.0" layoutX="1065.0" layoutY="755.0" stroke="#5d5d4b" strokeType="INSIDE" width="190.0" />
+      <Text fill="#5d5d4b" layoutX="-115.0" layoutY="365.0" rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SIMILARITY SCORE" textAlignment="CENTER" wrappingWidth="386.3319854736328">
+         <font>
+            <Font name="HelveticaLTStd-Blk" size="36.0" />
+         </font>
+      </Text>
+      <Text fx:id="fileTotal" fill="#5d5d4b" layoutX="1065.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="190.0" />
+      <Rectangle fill="#5d5d4b" height="43.0" layoutX="70.0" layoutY="556.0" stroke="#5d5d4b" strokeType="INSIDE" strokeWidth="0.0" width="26.0" />
+      <Rectangle fill="#f6f6f6" height="164.0" layoutX="83.0" layoutY="611.0" stroke="#5d5d4b" strokeType="INSIDE" strokeWidth="2.0" width="13.0" />
+      <Text fill="#5d5d4b" layoutX="-7.0" layoutY="696.0" opacity="0.6" rotate="-90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BY: T. COTEOK &amp; J. PORTUGAL" wrappingWidth="165.75">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="11.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
