@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MatrixDisplay.LongestString">
+   <children>
+      <Rectangle fill="#eeeeee" height="678.0" layoutX="28.0" layoutY="21.0" stroke="#5d5d4b" strokeType="INSIDE" strokeWidth="3.0" width="912.0" />
+      <Text fill="#5d5d4b" layoutX="42.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LONGEST STRING SIMILARITY: " wrappingWidth="375.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#5d5d4b" layoutX="45.0" layoutY="527.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FOUND IN FILES:" wrappingWidth="212.33200073242188">
+         <font>
+            <Font name="HelveticaLTStd-Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="longestString" fill="#5d5d4b" layoutX="80.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="800.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="fileFound1" fill="#5d5d4b" layoutX="138.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="777.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#5d5d4b" layoutX="199.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FILE SIMILARITY STATISTICS" textAlignment="CENTER" wrappingWidth="569.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Blk" size="32.0" />
+         </font>
+      </Text>
+      <Text fill="#5d5d4b" layoutX="43.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOP SIMILAR FILES" wrappingWidth="244.33200073242188">
+         <font>
+            <Font name="HelveticaLTStd-Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="one" fill="#5d5d4b" layoutX="100.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1)                                                   &amp;" wrappingWidth="394.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="two" fill="#5d5d4b" layoutX="100.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2)                                                   &amp;" wrappingWidth="428.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="three" fill="#5d5d4b" layoutX="100.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3)                                                   &amp;" wrappingWidth="394.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="four" fill="#5d5d4b" layoutX="100.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4)                                                   &amp;" wrappingWidth="481.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="five" fill="#5d5d4b" layoutX="100.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5)                                                   &amp;" wrappingWidth="394.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="firstSimilar1" fill="#5d5d4b" layoutX="135.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="304.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="secondSimilar1" fill="#5d5d4b" layoutX="135.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="304.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="thirdSimilar1" fill="#5d5d4b" layoutX="135.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="304.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="fourthSimilar1" fill="#5d5d4b" layoutX="135.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="304.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="fifthSimilar1" fill="#5d5d4b" layoutX="135.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="304.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="firstSimilar2" fill="#5d5d4b" layoutX="497.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="304.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="secondSimilar2" fill="#5d5d4b" layoutX="497.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="304.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="thirdSimilar2" fill="#5d5d4b" layoutX="497.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="304.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="fourthSimilar2" fill="#5d5d4b" layoutX="497.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="304.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="fifthSimilar2" fill="#5d5d4b" layoutX="497.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="304.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#5d5d4b" layoutX="818.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SCORE" wrappingWidth="86.33200073242188">
+         <font>
+            <Font name="HelveticaLTStd-Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="score1" fill="#5d5d4b" layoutX="802.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="117.33200073242188">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="score2" fill="#5d5d4b" layoutX="802.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="117.33200073242188">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="score3" fill="#5d5d4b" layoutX="802.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="117.33200073242188">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="score4" fill="#5d5d4b" layoutX="802.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="117.33200073242188">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="score5" fill="#5d5d4b" layoutX="802.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="117.33200073242188">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="fileFound2" fill="#5d5d4b" layoutX="138.0" layoutY="654.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="777.3320007324219">
+         <font>
+            <Font name="HelveticaLTStd-Roman" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#5d5d4b" layoutX="136.0" layoutY="612.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AND" wrappingWidth="56.332000732421875">
+         <font>
+            <Font name="HelveticaLTStd-Bold" size="24.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

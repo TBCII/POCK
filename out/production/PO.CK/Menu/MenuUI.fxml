@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="MenuAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Menu.MenuController">
+   <children>
+      <Rectangle fx:id="rectPath" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="671.0" layoutX="78.0" layoutY="75.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1145.0" />
+      <Rectangle fx:id="rectPath2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="671.0" layoutX="68.0" layoutY="65.0" opacity="0.0" rotate="180.0" stroke="BLACK" strokeType="INSIDE" width="1145.0" />
+      <Text fill="#5d5d4b" layoutX="296.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SOFTWARE SIMILARITY PROGRAM" textAlignment="CENTER" wrappingWidth="689.546875">
+         <font>
+            <Font name="HelveticaLTStd-Blk" size="36.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9c9c9" height="55.0" layoutX="14.0" layoutY="14.0" stroke="#c9c9c9" strokeType="INSIDE" strokeWidth="0.0" width="18.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9c9c9" height="18.0" layoutX="14.0" layoutY="14.0" stroke="#5d5d4b" strokeType="INSIDE" strokeWidth="0.0" width="55.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9c9c9" height="55.0" layoutX="1230.0" layoutY="750.0" rotate="90.0" stroke="#979797" strokeType="INSIDE" strokeWidth="0.0" width="18.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9c9c9" height="18.0" layoutX="1230.0" layoutY="750.0" rotate="90.0" stroke="#979797" strokeType="INSIDE" strokeWidth="0.0" width="55.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="55.0" layoutX="14.0" layoutY="732.0" rotate="-180.0" stroke="#979797" strokeType="INSIDE" strokeWidth="0.0" width="18.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="18.0" layoutX="14.0" layoutY="769.0" rotate="-180.0" stroke="#979797" strokeType="INSIDE" strokeWidth="0.0" width="55.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="55.0" layoutX="1230.0" layoutY="-4.0" rotate="90.0" stroke="#dddddd" strokeType="INSIDE" strokeWidth="0.0" width="18.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="18.0" layoutX="1230.0" layoutY="33.0" rotate="90.0" stroke="#dddddd" strokeType="INSIDE" strokeWidth="0.0" width="55.0" />
+      <Rectangle fx:id="squareOne" arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="18.0" stroke="#979797" strokeType="INSIDE" strokeWidth="2.0" width="18.0" />
+      <Rectangle fx:id="squareTwo" arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="18.0" stroke="#979797" strokeType="INSIDE" strokeWidth="2.0" width="18.0" />
+      <ImageView fitHeight="281.0" fitWidth="289.0" layoutX="500.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imageAssets/POCKLogo.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="288.0" layoutY="609.0" mnemonicParsing="false" onAction="#ProceedSearch" prefHeight="93.0" prefWidth="705.0" style="-fx-background-color: #FFFFFF;" text="BEGIN SEARCH" textAlignment="CENTER" textFill="#5d5d4b">
+         <font>
+            <Font name="HelveticaLTStd-Blk" size="32.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" color="#8a8a8a" height="40.0" radius="19.5" width="40.0" />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>
