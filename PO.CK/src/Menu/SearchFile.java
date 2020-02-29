@@ -39,5 +39,4 @@ public class SearchFile extends MenuController{
         AnchorPane nextAnchorPane = FXMLLoader.load(getClass().getResource("MenuUI.fxml"));
         searchAnchor.getChildren().setAll(nextAnchorPane);
     }
-
 }

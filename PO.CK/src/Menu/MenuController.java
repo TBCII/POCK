@@ -83,5 +83,4 @@ public class MenuController {
         AnchorPane nextAnchorPane = FXMLLoader.load(getClass().getResource("SearchFile.fxml"));
         MenuAnchor.getChildren().setAll(nextAnchorPane);
     }
-
 }

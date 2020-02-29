@@ -66,9 +66,7 @@ public class HalsteadMetrics {
 	public double getCalcProgLen() {
 		CalcProgLen = DistOperators*(Math.log(DistOperators) / Math.log(2)) + DistOperands*(Math.log(DistOperands) / Math.log(2));
 		//System.out.println("Calculated Program Length= "+ CalcProgLen);
-		if(DistOperators > 0){
-			return CalcProgLen;
-		}
+		if(DistOperators > 0) return CalcProgLen;
 		else return 0;
 	}
 

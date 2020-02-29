@@ -99,5 +99,4 @@ public class ProgramMetrics extends Controller{
             metricStats.add(cellFormat8, 8, i+1);
         }
     }
-
 }

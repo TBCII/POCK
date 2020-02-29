@@ -18,7 +18,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-
 @SuppressWarnings("WeakerAccess")
 public class MetricMachine{
     //CHANGE: Renamed to MetricMachine
@@ -58,7 +57,6 @@ public class MetricMachine{
         return visitor;
     }
 
-
     // parse file in char array
     private static char[] ReadFileToCharArray(String filePath) throws IOException {
         StringBuilder fileData = new StringBuilder(1000);
@@ -74,7 +72,6 @@ public class MetricMachine{
 
         return fileData.toString().toCharArray();
     }
-
 
     // parse files in a directory to list of char array
     private static List<char[]> ParseFilesInDir(List<String> JavaFiles) throws IOException {
@@ -165,7 +162,6 @@ public class MetricMachine{
         }
 
         //System.out.println("\n");
-
 
         // calculate Halstead Complexity Metrics
         HalsteadMetrics hal = new HalsteadMetrics();

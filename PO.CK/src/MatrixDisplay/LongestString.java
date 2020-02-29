@@ -29,7 +29,6 @@ public class LongestString extends Controller{
     public Text four;
     public Text five;
 
-
     public void initialize(){
         if(fileCount >= 5){
             Tooltip tip00 = new Tooltip("File [" + (topIndices[0][0] + 1) + "] ");
@@ -179,7 +178,6 @@ public class LongestString extends Controller{
             score3.setOpacity(0);
             score4.setOpacity(0);
             score5.setOpacity(0);
-
 
             Tooltip tip00 = new Tooltip("File [" + (topIndices[0][0] + 1) + "] ");
             Tooltip tip01 = new Tooltip("File [" + (topIndices[0][1] + 1) + "] ");

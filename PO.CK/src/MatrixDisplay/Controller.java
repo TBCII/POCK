@@ -45,11 +45,9 @@ public class Controller extends Menu.MenuController {
     String line1;
     String line2 = "";
 
-
     int currentCharacterCount = 0;
     int longestCharacterCount = 0;
     int lineCount = 0;
-
 
     int lineCount1;
     int lineCount2;
@@ -65,22 +63,18 @@ public class Controller extends Menu.MenuController {
     File submissionsFolder = new File(directoryPath);
 
     public void initialize() throws IOException {
-
         PathTransition transition = new PathTransition();
         transition.setNode(squareOne);
         transition.setDuration(Duration.seconds(5));
         transition.setPath(rectPath);
         transition.setCycleCount(PathTransition.INDEFINITE);
         transition.play();
-
         System.out.println("I N I T I A L I Z I N G");
 
         if(submissionsFolder.exists() && submissionsFolder.isDirectory()){
             File arr[] = submissionsFolder.listFiles();
-
             listFiles(arr, 0 ,0);
         }
-
         lineStorage = new ArrayList[fileCount];
 
         for(int i = 0; i < fileCount; i++){
@@ -107,15 +101,11 @@ public class Controller extends Menu.MenuController {
         bFile2.close();
 
         if(fileCount < 2) toSimStats.setDisable(true);
-
     }
 
     static void listFiles(File[] arr, int index, int level){
         if(index == arr.length) return;
-
-        if(arr[index].isDirectory()){
-            listFiles(arr[index].listFiles(), 0, level+1);
-        }
+        if(arr[index].isDirectory())listFiles(arr[index].listFiles(), 0, level+1);
 
         else if(arr[index].isFile()) {
             if (arr[index].getName().endsWith(".java") || arr[index].getName().endsWith(".cpp")){
@@ -126,7 +116,7 @@ public class Controller extends Menu.MenuController {
             }
         }
 
-        else if(arr[index].isDirectory()){
+        else if(arr[index].isDirectory()) {
             //System.out.print(arr[index].getName() + "/");
             listFiles(arr[index].listFiles(), 0, level+1);
         }
@@ -136,7 +126,6 @@ public class Controller extends Menu.MenuController {
     private void pushLineContentsToArray() throws IOException {
         for(int i = 0; i < fileCount; i++){
             for(int j = 0; j < fileCount; j++){
-
                 bFile1 = new BufferedReader(new FileReader(filePath[i]));
 
                 ArrayList<String> arrayOfLines = new ArrayList<String>();
@@ -146,7 +135,6 @@ public class Controller extends Menu.MenuController {
                     arrayOfLines.add(line1SansSpaces);
                     lineCount1 = lineCount1 + 1;
                 }
-
                 lineStorage[i] = arrayOfLines;
             }
         }
@@ -186,7 +174,6 @@ public class Controller extends Menu.MenuController {
                         lineCount1 = lineCount1 + 1;
                     }
                 }
-
             }
         }
     }
@@ -262,13 +249,10 @@ public class Controller extends Menu.MenuController {
                 CorrelationMatrix.add(cellFormat, j, i);
             }
         }
-
         fileTotal.setText(" Total Number of Files:  " + fileCount);
 
         longestLineFile1 = longestLineFile1.replace("assets\\Submissions\\","");
         longestLineFile2 = longestLineFile2.replace("assets\\Submissions\\","");
-
-
 
         for (int i = 0; i < fileCount; i++) {
             for (int j = 0; j < fileCount; j++) {
@@ -340,7 +324,6 @@ public class Controller extends Menu.MenuController {
                         topIndices[3][0] = i;
                         topIndices[3][1] = j;
                     }
-
                     else if (similarityIndex[i][j] > fifthScore) {
                         fifthScore = similarityIndex[i][j];
 
@@ -357,13 +340,10 @@ public class Controller extends Menu.MenuController {
             Label fileName = new Label();
             fileName.setText("  [" + (i + 1) + "] " + fileNames[i]);
             fileName.setStyle("-fx-text-fill: #5d5d4b;");
-
             VBox cellFormat = new VBox();
             cellFormat.setStyle("-fx-border-color: #5d5d4b;");
-
             Tooltip t = new Tooltip(filePath[i]);
             Tooltip.install(cellFormat, t);
-
             cellFormat.getChildren().addAll(fileName);
             FilesList.add(cellFormat, 0, i);
         }
@@ -371,9 +351,7 @@ public class Controller extends Menu.MenuController {
 
     public void longestStringStats(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("LongestString.fxml"));
-
         Scene scene = new Scene(root);
-
         Stage stage = new Stage();
         stage.setTitle("SIMILARITY STATISTICS");
         stage.setScene(scene);
@@ -383,9 +361,7 @@ public class Controller extends Menu.MenuController {
 
     public void programMetrics(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("ProgramMetrics.fxml"));
-
         Scene scene = new Scene(root);
-
         Stage stage = new Stage();
         stage.setTitle("PROGRAM METRICS");
         stage.setScene(scene);
@@ -398,4 +374,3 @@ public class Controller extends Menu.MenuController {
         matrixAnchor.getChildren().setAll(nextAnchorPane);
     }
 }
-
