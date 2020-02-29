@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -374,7 +375,9 @@ public class Controller extends Menu.MenuController {
         Scene scene = new Scene(root);
 
         Stage stage = new Stage();
+        stage.setTitle("SIMILARITY STATISTICS");
         stage.setScene(scene);
+        stage.getIcons().add(new Image("imageAssets/POCKicon.png"));
         stage.show();
     }
 
@@ -384,7 +387,9 @@ public class Controller extends Menu.MenuController {
         Scene scene = new Scene(root);
 
         Stage stage = new Stage();
+        stage.setTitle("PROGRAM METRICS");
         stage.setScene(scene);
+        stage.getIcons().add(new Image("imageAssets/POCKicon.png"));
         stage.show();
     }
 
