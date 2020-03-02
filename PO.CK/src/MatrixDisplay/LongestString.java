@@ -197,9 +197,8 @@ public class LongestString extends Controller{
         Tooltip ttipF1 = new Tooltip(longestLineDir1);
         Tooltip.install(fileFound1, ttipF1);
 
-        Tooltip ttipF2 = new Tooltip(longestLineDir1);
-        Tooltip.install(fileFound1, ttipF2);
+        Tooltip ttipF2 = new Tooltip(longestLineDir2);
+        Tooltip.install(fileFound2, ttipF2);
 
-        //lineMatched.setText(String.valueOf(longestLineNum));
     }
 }

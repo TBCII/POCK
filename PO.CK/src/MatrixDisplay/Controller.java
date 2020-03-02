@@ -81,32 +81,49 @@ public class Controller extends Menu.MenuController {
             listFiles(arr, 0 ,0);
         }
 
-        lineStorage = new ArrayList[fileCount];
+        if(fileCount > 0){
+            lineStorage = new ArrayList[fileCount];
 
-        for(int i = 0; i < fileCount; i++){
-            for(int j = 0; j < fileCount; j++){
-                similarityCount[i][j] = 0;
+            for(int i = 0; i < fileCount; i++){
+                for(int j = 0; j < fileCount; j++){
+                    similarityCount[i][j] = 0;
+                }
             }
+            // LINE TO ARRAY PUSHING
+            pushLineContentsToArray();
+
+            // LINE SIMILARITY CHECKER
+            checkIndividualSimilarity();
+
+            // SEARCH FOR THE LONGEST LINE SIMILARITY
+            checkLongestSimilarity();
+
+            // DISPLAY MATRIX AND SIMILARITY STATUSES
+            displayMatrix();
+
+            // DISPLAY ALL OF THE FILES
+            displayFiles();
+
+            bFile1.close();
+            bFile2.close();
+
+            if(fileCount < 2) toSimStats.setDisable(true);
         }
-        // LINE TO ARRAY PUSHING
-        pushLineContentsToArray();
 
-        // LINE SIMILARITY CHECKER
-        checkIndividualSimilarity();
+        else{
+            Parent root = FXMLLoader.load(getClass().getResource("ErrNoFiles.fxml"));
 
-        // SEARCH FOR THE LONGEST LINE SIMILARITY
-        checkLongestSimilarity();
+            Scene scene = new Scene(root);
 
-        // DISPLAY MATRIX AND SIMILARITY STATUSES
-        displayMatrix();
+            Stage stage = new Stage();
+            stage.setTitle("ERROR!");
+            stage.setScene(scene);
+            stage.getIcons().add(new Image("imageAssets/POCKicon.png"));
+            stage.show();
 
-        // DISPLAY ALL OF THE FILES
-        displayFiles();
-
-        bFile1.close();
-        bFile2.close();
-
-        if(fileCount < 2) toSimStats.setDisable(true);
+            AnchorPane nextAnchorPane = FXMLLoader.load(getClass().getResource("../Menu/SearchFile.fxml"));
+            matrixAnchor.getChildren().setAll(nextAnchorPane);
+        }
 
     }
 

@@ -5,14 +5,49 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
 public class ProgramMetrics extends Controller{
 
     public GridPane metricStats;
+    public Text vocab;
+    public Text length;
+    public Text calcLen;
+    public Text vol;
+    public Text diff;
+    public Text eff;
+    public Text time;
+    public Text bugs;
+
 
     public void initialize() throws IOException {
+
+        Tooltip t1 = new Tooltip("The total number of unique operator and unique operand occurrences.");
+        Tooltip.install(vocab, t1);
+
+        Tooltip t2 = new Tooltip("The total number of operator occurrences and the total number of operand occurrences.");
+        Tooltip.install(length, t2);
+
+        Tooltip t3 = new Tooltip("Estimated program length.");
+        Tooltip.install(calcLen, t3);
+
+        Tooltip t4 = new Tooltip("Proportional to program size, represents the size, in bits, of space necessary for storing the program.");
+        Tooltip.install(vol, t4);
+
+        Tooltip t5 = new Tooltip("This parameter shows how difficult to handle the program is.");
+        Tooltip.install(diff, t5);
+
+        Tooltip t6 = new Tooltip("Measures the amount of mental activity needed to translate the existing algorithm into implementation in the specified program language.");
+        Tooltip.install(eff, t6);
+
+        Tooltip t7 = new Tooltip("Shows time (in minutes) needed to translate the existing algorithm into implementation in the specified program language.");
+        Tooltip.install(time, t7);
+
+        Tooltip t8 = new Tooltip("Estimate for the number of errors in the implementation.");
+        Tooltip.install(bugs, t8);
+
         for (int i = 0; i < fileCount; i++) {
 
             HalsteadMetrics hal = MetricMachine.getMetrics(filePath[i]);
@@ -73,7 +108,7 @@ public class ProgramMetrics extends Controller{
             cellFormat6.getChildren().addAll(progEffort);
 
             Label progTime = new Label();
-            progTime.setText(df.format(hal.getTimeReqProg()) + " sec.");
+            progTime.setText(df.format(hal.getTimeReqProg()));
             progTime.setStyle("-fx-text-fill: #5d5d4b;");
             VBox cellFormat7 = new VBox();
             cellFormat7.setAlignment(Pos.CENTER);

@@ -163,42 +163,42 @@
                               <Font name="HelveticaLTStd-Roman" size="14.0" />
                            </font>
                         </Text>
-                        <Text fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="VOCABULARY" textAlignment="CENTER" wrappingWidth="86.13671875" GridPane.columnIndex="1">
+                        <Text fx:id="vocab" fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="VOCABULARY" textAlignment="CENTER" wrappingWidth="86.13671875" GridPane.columnIndex="1">
                            <font>
                               <Font name="HelveticaLTStd-Roman" size="12.0" />
                            </font>
                         </Text>
-                        <Text fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="LENGTH" textAlignment="CENTER" wrappingWidth="85.13671875" GridPane.columnIndex="2">
+                        <Text fx:id="length" fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="LENGTH" textAlignment="CENTER" wrappingWidth="85.13671875" GridPane.columnIndex="2">
                            <font>
                               <Font name="HelveticaLTStd-Roman" size="12.0" />
                            </font>
                         </Text>
-                        <Text fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="CALC. LENGTH" textAlignment="CENTER" wrappingWidth="85.13671875" GridPane.columnIndex="3">
+                        <Text fx:id="calcLen" fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="CALC. LENGTH" textAlignment="CENTER" wrappingWidth="85.13671875" GridPane.columnIndex="3">
                            <font>
                               <Font name="HelveticaLTStd-Roman" size="11.0" />
                            </font>
                         </Text>
-                        <Text fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="VOLUME" textAlignment="CENTER" wrappingWidth="85.13671875" GridPane.columnIndex="4">
+                        <Text fx:id="vol" fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="VOLUME" textAlignment="CENTER" wrappingWidth="85.13671875" GridPane.columnIndex="4">
                            <font>
                               <Font name="HelveticaLTStd-Roman" size="12.0" />
                            </font>
                         </Text>
-                        <Text fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="DIFFICULTY" textAlignment="CENTER" wrappingWidth="85.13671875" GridPane.columnIndex="5">
+                        <Text fx:id="diff" fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="DIFFICULTY" textAlignment="CENTER" wrappingWidth="85.13671875" GridPane.columnIndex="5">
                            <font>
                               <Font name="HelveticaLTStd-Roman" size="12.0" />
                            </font>
                         </Text>
-                        <Text fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="EFFORT" textAlignment="CENTER" wrappingWidth="85.13671875" GridPane.columnIndex="6">
+                        <Text fx:id="eff" fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="EFFORT" textAlignment="CENTER" wrappingWidth="85.13671875" GridPane.columnIndex="6">
                            <font>
                               <Font name="HelveticaLTStd-Roman" size="12.0" />
                            </font>
                         </Text>
-                        <Text fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="TIME" textAlignment="CENTER" wrappingWidth="85.13671875" GridPane.columnIndex="7">
+                        <Text fx:id="time" fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="TIME" textAlignment="CENTER" wrappingWidth="85.13671875" GridPane.columnIndex="7">
                            <font>
                               <Font name="HelveticaLTStd-Roman" size="12.0" />
                            </font>
                         </Text>
-                        <Text fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="BUGS" textAlignment="CENTER" wrappingWidth="85.13671875" GridPane.columnIndex="8">
+                        <Text fx:id="bugs" fill="#f6f6f6" strokeType="OUTSIDE" strokeWidth="0.0" text="BUGS" textAlignment="CENTER" wrappingWidth="85.13671875" GridPane.columnIndex="8">
                            <font>
                               <Font name="HelveticaLTStd-Roman" size="12.0" />
                            </font>
